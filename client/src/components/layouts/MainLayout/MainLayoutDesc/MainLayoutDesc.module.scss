@@ -1,0 +1,21 @@
+@import "../MainLayout.module.scss";
+
+.MainLayoutDesc {
+  display: none;
+  flex-grow: 1;
+  &__nav {
+    width: 30%;
+    max-width: 250px;
+    @include navlink;
+  }
+  &__content {
+    flex-grow: 1;
+    @include displayFlex;
+  }
+}
+
+@media (min-width: 400px) {
+  .MainLayoutDesc {
+    display: flex;
+  }
+}
