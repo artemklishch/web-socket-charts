@@ -1,0 +1,15 @@
+.GreetingText {
+  &__greeting {
+    path {
+      stroke-dasharray: 200;
+      stroke-dashoffset: 200;
+      animation: greetingTextWriting 5s linear forwards;
+    }
+  }
+}
+
+@keyframes greetingTextWriting {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}

@@ -1,15 +1,11 @@
-import { useRef, useCallback, ReactNode, FC } from "react";
+import { useRef, useCallback, FC } from "react";
 import classes from "./MainLayoutMob.module.scss";
 import { NavLink } from "react-router-dom";
 import routes from "../../../../routes";
 import { ReactComponent as BurgerIon } from "../../../../assets/icons/burger_icon.svg";
 import { ReactComponent as CloseIcon } from "../../../../assets/icons/close_icon.svg";
 
-type MainLayoutMobProps = {
-  children: ReactNode;
-};
-
-const MainLayoutMob: FC<MainLayoutMobProps> = ({ children }) => {
+const MainLayoutMob: FC = () => {
   const navMenu = useRef<HTMLDivElement | null>(null);
   const showMobileMenu = useCallback(() => {
     if (navMenu.current) {
@@ -35,7 +31,6 @@ const MainLayoutMob: FC<MainLayoutMobProps> = ({ children }) => {
           Charts
         </NavLink>
       </nav>
-      <aside className={classes.MainLayoutMob__content}>{children}</aside>
     </div>
   );
 };
