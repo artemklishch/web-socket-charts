@@ -1,2 +1,36 @@
 .ChartsPage {
+  &__chartSection {
+    background-color: white;
+    border-radius: 10px;
+    margin: 20px 0;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    &_title {
+      align-self: center;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+    &_descr {
+      padding: 0 10px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    &_detailsBtn {
+      align-self: center;
+      width: fit-content;
+      background-color: rgba(146, 151, 66, 0.5);
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: 700;
+      text-decoration: none;
+      &:active {
+        opacity: 0.5;
+      }
+    }
+  }
 }
