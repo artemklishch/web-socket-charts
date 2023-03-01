@@ -1,4 +1,4 @@
-import { FC, useRef, useEffect, useState } from "react";
+import { FC } from "react";
 import {
   LineChart,
   Line,
@@ -6,7 +6,6 @@ import {
   XAxis,
   YAxis,
   Tooltip,
-  ResponsiveContainer,
   AreaChart,
   Area,
   BarChart,
@@ -15,38 +14,31 @@ import {
   PieChart,
   Pie,
 } from "recharts";
-import classes from "./Chart.module.scss";
 import { ChartDataType, ChartType } from "../../../types.d";
 
 type ChartProps = {
-  charttype: string;
+  charttype: string | null;
   chartData: ChartDataType;
+  chartWidth: number;
+  chartHeight: number;
 };
 
-const Chart: FC<ChartProps> = ({ charttype, chartData }) => {
-  const sectionBlockRef = useRef<HTMLElement | null>(null);
-  const [sectionWidth, setSectionWidth] = useState<number>();
-  const setChartWidth = () => {
-    const sectionWidth = sectionBlockRef.current?.getBoundingClientRect().width;
-    setSectionWidth(sectionWidth);
-  };
-  useEffect(() => {
-    setChartWidth();
-    window.addEventListener("resize", setChartWidth);
-    return () => window.removeEventListener("resize", setChartWidth);
-  }, []);
+const Chart: FC<ChartProps> = ({
+  charttype,
+  chartData,
+  chartWidth,
+  chartHeight,
+}) => {
   const {
     metricData,
     prevPriceColor,
     priceColor,
-    name,
-    description,
     mentricDataKey,
     priceTitle,
     prevPriceTitle,
   } = chartData;
   let chartForRender = (
-    <LineChart width={sectionWidth} height={300} data={metricData}>
+    <LineChart width={chartWidth} height={chartHeight} data={metricData}>
       <Line type="monotone" dataKey={priceTitle} stroke={priceColor} />
       <Line type="monotone" dataKey={prevPriceTitle} stroke={prevPriceColor} />
       <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
@@ -57,7 +49,7 @@ const Chart: FC<ChartProps> = ({ charttype, chartData }) => {
   );
   if (charttype === ChartType.areachart) {
     chartForRender = (
-      <AreaChart width={sectionWidth} height={300} data={metricData}>
+      <AreaChart width={chartWidth} height={chartHeight} data={metricData}>
         <defs>
           <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
             <stop offset="5%" stopColor={priceColor} stopOpacity={0.8} />
@@ -90,7 +82,7 @@ const Chart: FC<ChartProps> = ({ charttype, chartData }) => {
     );
   } else if (charttype === ChartType.barchart) {
     chartForRender = (
-      <BarChart width={sectionWidth} height={300} data={metricData}>
+      <BarChart width={chartWidth} height={chartHeight} data={metricData}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey={mentricDataKey} />
         <YAxis />
@@ -102,7 +94,7 @@ const Chart: FC<ChartProps> = ({ charttype, chartData }) => {
     );
   } else if (charttype === ChartType.piechart) {
     chartForRender = (
-      <PieChart width={sectionWidth} height={300}>
+      <PieChart width={chartWidth} height={chartHeight}>
         <Pie
           data={metricData}
           dataKey={priceTitle}
@@ -127,16 +119,7 @@ const Chart: FC<ChartProps> = ({ charttype, chartData }) => {
       </PieChart>
     );
   }
-  return (
-    <section ref={sectionBlockRef} className={classes.Chart}>
-      <h3 className={classes.Chart__title}>{name}</h3>
-      <ResponsiveContainer width="99%" height={300}>
-        {chartForRender}
-      </ResponsiveContainer>
-      <p className={classes.Chart__descr}>{description}</p>
-      <button className={classes.Chart__detailsBtn}>Details</button>
-    </section>
-  );
+  return chartForRender;
 };
 
 export default Chart;

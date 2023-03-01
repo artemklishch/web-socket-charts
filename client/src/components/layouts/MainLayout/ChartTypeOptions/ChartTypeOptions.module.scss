@@ -1,0 +1,20 @@
+.ChartTypeOptions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  &__item {
+    font-size: 18px;
+    font-weight: 400;
+    color: white;
+    padding: 20px 30px 20px 45px;
+    transition: 0.3s;
+    background-color: rgb(192, 178, 96);
+    cursor: pointer;
+    &:hover {
+      background-color: rgb(206, 191, 104);
+    }
+    &[data-active="true"] {
+      background-color: rgb(175, 162, 88);
+    }
+  }
+}
