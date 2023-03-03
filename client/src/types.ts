@@ -7,6 +7,7 @@ export type ChartDataType = {
   mentricDataKey: string;
   priceTitle: string;
   prevPriceTitle: string;
+  isReserved?: boolean;
   metricData: Array<{
     Price: number;
     "Previos Price": number;
@@ -20,3 +21,8 @@ export enum ChartType {
   barchart = "barchart",
   piechart = "piechart",
 }
+
+export type GetLocStStr = () => string | null;
+export type SetLocStStr = (val: string) => void;
+export type SetLocStStrNoArg = () => void;
+export type ClearLocSt = () => void;

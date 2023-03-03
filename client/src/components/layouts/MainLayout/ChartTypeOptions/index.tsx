@@ -1,6 +1,6 @@
 import { FC, MouseEvent } from "react";
 import classes from "./ChartTypeOptions.module.scss";
-import { ChartType } from "../../../../types.d";
+import { ChartType } from "../../../../types";
 import { useAppSelector, useAppDispatch } from "../../../../store/hooks";
 import {
   selectChartsData,

@@ -14,7 +14,7 @@ import {
   PieChart,
   Pie,
 } from "recharts";
-import { ChartDataType, ChartType } from "../../../types.d";
+import { ChartDataType, ChartType } from "../../../types";
 
 type ChartProps = {
   charttype: string | null;
