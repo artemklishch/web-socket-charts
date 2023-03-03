@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../";
-import { ChartDataType, ChartType } from "../../types.d";
+import { ChartDataType } from "../../types";
+import { getChartType, setChartType } from "../../localeStorage";
 
 const DUMMY_CHARTS = [
   {
@@ -14,6 +15,7 @@ const DUMMY_CHARTS = [
     mentricDataKey: "month",
     priceTitle: "Price",
     prevPriceTitle: "Previos Price",
+    isReserved: true,
     metricData: [
       {
         Price: 3001,
@@ -42,6 +44,7 @@ const DUMMY_CHARTS = [
     mentricDataKey: "month",
     priceTitle: "Price",
     prevPriceTitle: "Previos Price",
+    isReserved: true,
     metricData: [
       {
         Price: 1001,
@@ -70,6 +73,7 @@ const DUMMY_CHARTS = [
     mentricDataKey: "month",
     priceTitle: "Price",
     prevPriceTitle: "Previos Price",
+    isReserved: true,
     metricData: [
       {
         Price: 3101,
@@ -98,6 +102,7 @@ const DUMMY_CHARTS = [
     mentricDataKey: "month",
     priceTitle: "Price",
     prevPriceTitle: "Previos Price",
+    isReserved: true,
     metricData: [
       {
         Price: 4101,
@@ -121,11 +126,13 @@ const DUMMY_CHARTS = [
 interface ChartsState {
   chartsData: ChartDataType[];
   charttype: string | null;
+  isChartSocketLoading: boolean;
 }
 
 const initialState: ChartsState = {
   chartsData: DUMMY_CHARTS,
   charttype: null,
+  isChartSocketLoading: true,
 };
 
 export const chartsSlice = createSlice({
@@ -133,18 +140,28 @@ export const chartsSlice = createSlice({
   initialState,
   reducers: {
     setStartChartType(state) {
-      const charttype =
-        localStorage.getItem("charttype") || ChartType.linechart;
+      const charttype = getChartType();
       state.charttype = charttype;
     },
     changeChartType(state, action: PayloadAction<string>) {
-      localStorage.setItem("charttype", action.payload);
+      setChartType(action.payload);
       state.charttype = action.payload;
+    },
+    startGettingCharts(state, data: PayloadAction<ChartDataType[]>) {
+      state.chartsData = data.payload;
+    },
+    setChartSocketLoading(state, action: PayloadAction<boolean>) {
+      state.isChartSocketLoading = action.payload;
     },
   },
 });
 
-export const { setStartChartType, changeChartType } = chartsSlice.actions;
+export const {
+  setStartChartType,
+  changeChartType,
+  startGettingCharts,
+  setChartSocketLoading,
+} = chartsSlice.actions;
 
 export const selectChartsData = (state: RootState) => state.charts;
 

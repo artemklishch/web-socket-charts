@@ -2,10 +2,18 @@ import { FC, ReactNode, useCallback, useRef } from "react";
 import classes from "./MainLayout.module.scss";
 import { NavLink, useLocation } from "react-router-dom";
 import routes from "../../../routes";
+import {
+  selectChartsData,
+  setChartSocketLoading,
+} from "../../../store/chartsdata/chartSlice";
+import { useAppSelector, useAppDispatch } from "../../../store/hooks";
+import { getSocketStatus } from "../../../localeStorage";
+import socket from "../../../web-socket";
 
 import { ReactComponent as BurgerIon } from "../../../assets/icons/burger_icon.svg";
 import { ReactComponent as CloseIcon } from "../../../assets/icons/close_icon.svg";
 import ChartTypeOptions from "./ChartTypeOptions";
+import Spinner from "../../UI/Spinner";
 
 type MainLayoutProps = {
   children: ReactNode;
@@ -14,6 +22,8 @@ const BREAKPOINT_WIDTH = 450;
 
 const MainLayout: FC<MainLayoutProps> = ({ children }) => {
   const navMenu = useRef<HTMLDivElement | null>(null);
+  const dispatch = useAppDispatch();
+  const { isChartSocketLoading } = useAppSelector(selectChartsData);
   const { pathname } = useLocation();
   const isGoToChartsPage =
     pathname.startsWith(routes.chartspage) &&
@@ -31,6 +41,23 @@ const MainLayout: FC<MainLayoutProps> = ({ children }) => {
       navMenu.current.style.marginLeft = "-100%";
     }
   }, [navMenu]);
+  const gettingChartsHandler = useCallback(() => {
+    if (isChartSocketLoading) {
+      return;
+    }
+    dispatch(setChartSocketLoading(true));
+    const isGettingCharts = !!getSocketStatus();
+    if (isGettingCharts) {
+      socket.disconnect();
+    } else {
+      socket.connect();
+    }
+  }, [isChartSocketLoading, dispatch]);
+
+  const isGettingCharts = !!getSocketStatus();
+  const chartsStatusBtnText = isGettingCharts
+    ? "Stop getting charts"
+    : "Start getting charts";
   return (
     <div className={classes.MainLayout}>
       <aside className={classes.MainLayout__navbar}>
@@ -57,6 +84,18 @@ const MainLayout: FC<MainLayoutProps> = ({ children }) => {
             <NavLink to={routes.chartspage}>Charts</NavLink>
             {(pathname === routes.chartspage || isGoToChartsPage) && (
               <ChartTypeOptions />
+            )}
+          </div>
+          <div
+            className={classes.chartsStatusBtn}
+            data-isgettinggharts={isGettingCharts}
+            onClick={gettingChartsHandler}
+          >
+            <span>{chartsStatusBtnText}</span>
+            {isChartSocketLoading && (
+              <div className={classes.chartsStatusBtn__spinnerWrap}>
+                <Spinner />
+              </div>
             )}
           </div>
         </nav>
