@@ -2,8 +2,8 @@
   {
     "id": 1,
     "name": "HBF",
-    "priceColor": "#8884d8",
-    "prevPriceColor": "#1104d0",
+    "priceColor": "#9ff5b6",
+    "prevPriceColor": "#39804c",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, ab iure similique animi accusamus cumque molestiae labore repudiandae, aut iusto voluptate totam eum hic! Delectus itaque, repudiandae molestias ducimus consequuntur, porro dolorem ullam similique voluptates nihil cum cupiditate illo. Qui autem sequi harum et nobis repellendus reiciendis ipsam quod aspernatur, quas itaque voluptas mollitia ad earum voluptates. Omnis consequuntur delectus, minus illum amet voluptatum facere quos iusto dolores necessitatibus in itaque deserunt voluptates temporibus odio. Mollitia ea, provident dicta molestiae, alias ducimus officia voluptatum in praesentium incidunt dolor fugit natus soluta quidem velit magnam optio quod beatae reprehenderit? Saepe, doloremque.",
     "mentricDataKey": "month",
     "priceTitle": "Price",
@@ -86,8 +86,8 @@
   {
     "id": 4,
     "name": "BAF",
-    "priceColor": "#234d8",
-    "prevPriceColor": "#4644d0",
+    "priceColor": "#ee97f0",
+    "prevPriceColor": "#b66cb8",
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, ab iure similique animi accusamus cumque molestiae labore repudiandae, aut iusto voluptate totam eum hic! Delectus itaque, repudiandae molestias ducimus consequuntur, porro dolorem ullam similique voluptates nihil cum cupiditate illo. Qui autem sequi harum et nobis repellendus reiciendis ipsam quod aspernatur, quas itaque voluptas mollitia ad earum voluptates. Omnis consequuntur delectus, minus illum amet voluptatum facere quos iusto dolores necessitatibus in itaque deserunt voluptates temporibus odio. Mollitia ea, provident dicta molestiae, alias ducimus officia voluptatum in praesentium incidunt dolor fugit natus soluta quidem velit magnam optio quod beatae reprehenderit? Saepe, doloremque.",
     "mentricDataKey": "month",
     "priceTitle": "Price",

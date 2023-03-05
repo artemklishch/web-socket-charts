@@ -1,0 +1,22 @@
+@import "../MainLayout.module.scss";
+
+.StopStartLink {
+  @include btnlink;
+  height: 62px;
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(241, 8, 8);
+  &:hover,
+  &:active {
+    background-color: rgba(241, 8, 8);
+    opacity: 0.5;
+  }
+  &[data-isgettinggharts="false"] {
+    background-color: rgb(8, 109, 241);
+  }
+  &__spinnerWrap {
+    display: inline-block;
+    position: relative;
+    top: -5px;
+  }
+}
