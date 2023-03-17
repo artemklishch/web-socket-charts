@@ -48,14 +48,17 @@ const Chart: FC<ChartProps> = ({
     </LineChart>
   );
   if (charttype === ChartType.areachart) {
+    const colorId = Math.random().toString() + "colorPrice-" + priceColor;
+    const prevColorId =
+      Math.random().toString() + "colorPreviosPrice-" + prevPriceColor;
     chartForRender = (
       <AreaChart width={chartWidth} height={chartHeight} data={metricData}>
         <defs>
-          <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
+          <linearGradient id={colorId} x1="0" y1="0" x2="0" y2="1">
             <stop offset="5%" stopColor={priceColor} stopOpacity={0.8} />
             <stop offset="95%" stopColor={priceColor} stopOpacity={0} />
           </linearGradient>
-          <linearGradient id="colorPreviosPrice" x1="0" y1="0" x2="0" y2="1">
+          <linearGradient id={prevColorId} x1="0" y1="0" x2="0" y2="1">
             <stop offset="5%" stopColor={prevPriceColor} stopOpacity={0.8} />
             <stop offset="95%" stopColor={prevPriceColor} stopOpacity={0} />
           </linearGradient>
@@ -69,14 +72,14 @@ const Chart: FC<ChartProps> = ({
           dataKey={priceTitle}
           stroke={priceColor}
           fillOpacity={1}
-          fill="url(#colorPrice)"
+          fill={`url(#${colorId})`}
         />
         <Area
           type="monotone"
           dataKey={prevPriceTitle}
           stroke={prevPriceColor}
           fillOpacity={1}
-          fill="url(#colorPreviosPrice)"
+          fill={`url(#${prevColorId})`}
         />
       </AreaChart>
     );

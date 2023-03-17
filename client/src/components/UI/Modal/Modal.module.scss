@@ -13,14 +13,26 @@
   align-items: center;
   z-index: $modalZIndex;
   &__window {
+    max-height: 100vh;
+    overflow: auto;
     background-color: white;
-    padding: 20px;
+    padding: 30px;
     border-radius: 20px;
     width: 100%;
     margin-top: -150vh;
     animation: windowShow 0.2s linear forwards;
     display: flex;
     flex-direction: column;
+    position: relative;
+    &_closeicon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      &:active {
+        opacity: 0.5;
+      }
+    }
   }
 }
 

@@ -1,0 +1,20 @@
+.TextArea {
+  &__textfield {
+    display: block;
+    width: 100%;
+    font-size: 20px;
+    resize: none;
+    outline: none;
+    min-height: 35px;
+    padding: 5px 10px;
+    line-height: 1.6;
+    word-break: break-all;
+    border: 1px solid rgb(19, 171, 218);
+    border-radius: 10px;
+    font-size: 20px;
+    padding: 0 10px;
+    &[data-error] {
+      border-color: rgb(240, 10, 10);
+    }
+  }
+}

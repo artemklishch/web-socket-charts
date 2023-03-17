@@ -1,3 +1,5 @@
+import { ChartDataType } from "../../types";
+
 export type InitialValues = {
   chartName: string;
   priceColor: string;
@@ -11,11 +13,27 @@ export type ValidateValues = {
   description?: string;
 };
 
-export const initialValues: InitialValues = {
-  chartName: "",
-  priceColor: "#e66465",
-  previousPriceColor: "#f6b73c",
-  description: "",
+type GetInitialValuesType = (
+  val: ChartDataType | null | undefined,
+  isEditing: boolean
+) => InitialValues;
+
+export const getInitialValues: GetInitialValuesType = (val, isEditing) => {
+  if (val && isEditing) {
+    return {
+      chartName: val.name,
+      priceColor: val.priceColor,
+      previousPriceColor: val.prevPriceColor,
+      description: val.description,
+    };
+  } else {
+    return {
+      chartName: "",
+      priceColor: "#e66465",
+      previousPriceColor: "#f6b73c",
+      description: "",
+    };
+  }
 };
 
 export const validate = (values: InitialValues): ValidateValues => {

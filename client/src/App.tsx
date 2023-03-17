@@ -1,13 +1,16 @@
 import { useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import classes from "./App.module.scss";
 import routes from "./routes";
 import {
   setStartChartType,
   startGettingCharts,
   setChartSocketLoading,
+  setIsError,
+  setIsModalNotOpenClose,
+  selectChartsData,
 } from "./store/chartsdata/chartSlice";
-import { useAppDispatch } from "./store/hooks";
+import { useAppDispatch, useAppSelector } from "./store/hooks";
 import { ChartDataType } from "./types";
 import socket from "./web-socket";
 import {
@@ -21,15 +24,18 @@ import HomePage from "./pages/HomePage";
 import ChartsPage from "./pages/ChartsPage";
 import ChartPage from "./pages/ChartPage";
 import ErrorPage from "./pages/ErrorPage";
+import ModalNotification from "./components/ModalNotification";
 
 function App() {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const { isModalNotification } = useAppSelector(selectChartsData);
   useEffect(() => {
     dispatch(setStartChartType());
     socket.on("connect_error", (err: any) => {
       console.log("Error happend", err.message);
-      navigate(routes.errorpage);
+      dispatch(setIsError("Failed to get data"));
+      dispatch(setIsModalNotOpenClose(true));
+      dispatch(startGettingCharts([]));
       socket.disconnect();
       dispatch(setChartSocketLoading(false));
     });
@@ -49,9 +55,10 @@ function App() {
         clearSocketStatus();
       }
     };
-  }, [dispatch, navigate]);
+  }, [dispatch]);
   return (
     <main className={classes.App}>
+      {isModalNotification && <ModalNotification />}
       <MainLayout>
         <Routes>
           <Route path={routes.homepage} element={<HomePage />} />

@@ -3,136 +3,30 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../";
 import { ChartDataType } from "../../types";
 import { getChartType, setChartType } from "../../localeStorage";
-
-const DUMMY_CHARTS = [
-  {
-    id: 1,
-    name: "HBF",
-    priceColor: "#8884d8",
-    prevPriceColor: "#1104d0",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, ab iure similique animi accusamus cumque molestiae labore repudiandae, aut iusto voluptate totam eum hic! Delectus itaque, repudiandae molestias ducimus consequuntur, porro dolorem ullam similique voluptates nihil cum cupiditate illo. Qui autem sequi harum et nobis repellendus reiciendis ipsam quod aspernatur, quas itaque voluptas mollitia ad earum voluptates. Omnis consequuntur delectus, minus illum amet voluptatum facere quos iusto dolores necessitatibus in itaque deserunt voluptates temporibus odio. Mollitia ea, provident dicta molestiae, alias ducimus officia voluptatum in praesentium incidunt dolor fugit natus soluta quidem velit magnam optio quod beatae reprehenderit? Saepe, doloremque.",
-    mentricDataKey: "month",
-    priceTitle: "Price",
-    prevPriceTitle: "Previos Price",
-    isReserved: true,
-    metricData: [
-      {
-        Price: 3001,
-        "Previos Price": 2400,
-        month: "Jan",
-      },
-      {
-        Price: 1000,
-        "Previos Price": 1400,
-        month: "Feb",
-      },
-      {
-        Price: 2100,
-        "Previos Price": 2000,
-        month: "March",
-      },
-    ],
-  },
-  {
-    id: 2,
-    name: "HBsafasfF",
-    priceColor: "#0184d0",
-    prevPriceColor: "#9004d0",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, ab iure similique animi accusamus cumque molestiae labore repudiandae, aut iusto voluptate totam eum hic! Delectus itaque, repudiandae molestias ducimus consequuntur, porro dolorem ullam similique voluptates nihil cum cupiditate illo. Qui autem sequi harum et nobis repellendus reiciendis ipsam quod aspernatur, quas itaque voluptas mollitia ad earum voluptates. Omnis consequuntur delectus, minus illum amet voluptatum facere quos iusto dolores necessitatibus in itaque deserunt voluptates temporibus odio. Mollitia ea, provident dicta molestiae, alias ducimus officia voluptatum in praesentium incidunt dolor fugit natus soluta quidem velit magnam optio quod beatae reprehenderit? Saepe, doloremque.",
-    mentricDataKey: "month",
-    priceTitle: "Price",
-    prevPriceTitle: "Previos Price",
-    isReserved: true,
-    metricData: [
-      {
-        Price: 1001,
-        "Previos Price": 1400,
-        month: "Jan",
-      },
-      {
-        Price: 1200,
-        "Previos Price": 4400,
-        month: "Feb",
-      },
-      {
-        Price: 3100,
-        "Previos Price": 2300,
-        month: "March",
-      },
-    ],
-  },
-  {
-    id: 3,
-    name: "ABBBA",
-    priceColor: "#2224d8",
-    prevPriceColor: "#4444f0",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, ab iure similique animi accusamus cumque molestiae labore repudiandae, aut iusto voluptate totam eum hic! Delectus itaque, repudiandae molestias ducimus consequuntur, porro dolorem ullam similique voluptates nihil cum cupiditate illo. Qui autem sequi harum et nobis repellendus reiciendis ipsam quod aspernatur, quas itaque voluptas mollitia ad earum voluptates. Omnis consequuntur delectus, minus illum amet voluptatum facere quos iusto dolores necessitatibus in itaque deserunt voluptates temporibus odio. Mollitia ea, provident dicta molestiae, alias ducimus officia voluptatum in praesentium incidunt dolor fugit natus soluta quidem velit magnam optio quod beatae reprehenderit? Saepe, doloremque.",
-    mentricDataKey: "month",
-    priceTitle: "Price",
-    prevPriceTitle: "Previos Price",
-    isReserved: true,
-    metricData: [
-      {
-        Price: 3101,
-        "Previos Price": 2450,
-        month: "Jan",
-      },
-      {
-        Price: 10000,
-        "Previos Price": 14000,
-        month: "Feb",
-      },
-      {
-        Price: 2100,
-        "Previos Price": 2100,
-        month: "March",
-      },
-    ],
-  },
-  {
-    id: 4,
-    name: "BAF",
-    priceColor: "#234d8",
-    prevPriceColor: "#4644d0",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur, ab iure similique animi accusamus cumque molestiae labore repudiandae, aut iusto voluptate totam eum hic! Delectus itaque, repudiandae molestias ducimus consequuntur, porro dolorem ullam similique voluptates nihil cum cupiditate illo. Qui autem sequi harum et nobis repellendus reiciendis ipsam quod aspernatur, quas itaque voluptas mollitia ad earum voluptates. Omnis consequuntur delectus, minus illum amet voluptatum facere quos iusto dolores necessitatibus in itaque deserunt voluptates temporibus odio. Mollitia ea, provident dicta molestiae, alias ducimus officia voluptatum in praesentium incidunt dolor fugit natus soluta quidem velit magnam optio quod beatae reprehenderit? Saepe, doloremque.",
-    mentricDataKey: "month",
-    priceTitle: "Price",
-    prevPriceTitle: "Previos Price",
-    isReserved: true,
-    metricData: [
-      {
-        Price: 4101,
-        "Previos Price": 2550,
-        month: "Jan",
-      },
-      {
-        Price: 5000,
-        "Previos Price": 5400,
-        month: "Feb",
-      },
-      {
-        Price: 2600,
-        "Previos Price": 3400,
-        month: "March",
-      },
-    ],
-  },
-];
+import { ChartData } from "../../types";
 
 interface ChartsState {
-  chartsData: ChartDataType[];
+  chartsData: ChartDataType[] | null;
   charttype: string | null;
   isChartSocketLoading: boolean;
+  isModalNotification: boolean;
+  isError: string | null;
+  successText: string | null;
+  chartOnPage: ChartDataType | null | undefined;
+  interval: number;
+  isEditing: boolean;
 }
 
 const initialState: ChartsState = {
-  chartsData: DUMMY_CHARTS,
+  chartsData: null,
   charttype: null,
   isChartSocketLoading: true,
+  isModalNotification: false,
+  isError: null,
+  successText: null,
+  chartOnPage: null,
+  interval: 5000,
+  isEditing: false,
 };
 
 export const chartsSlice = createSlice({
@@ -148,10 +42,61 @@ export const chartsSlice = createSlice({
       state.charttype = action.payload;
     },
     startGettingCharts(state, data: PayloadAction<ChartDataType[]>) {
-      state.chartsData = data.payload;
+      if (Array.isArray(data.payload)) {
+        state.chartsData = data.payload;
+      } else {
+        state.chartsData = [];
+      }
     },
     setChartSocketLoading(state, action: PayloadAction<boolean>) {
       state.isChartSocketLoading = action.payload;
+    },
+    setIsError(state, action: PayloadAction<string | null>) {
+      state.isError = action.payload;
+    },
+    setSuccessText(state, action: PayloadAction<string | null>) {
+      state.successText = action.payload;
+    },
+    addNewChart(state, action: PayloadAction<ChartDataType>) {
+      if (state.chartsData) {
+        state.chartsData.unshift(action.payload);
+      } else {
+        state.chartsData = [action.payload];
+      }
+    },
+    deleteChart(state, action: PayloadAction<string | number>) {
+      const chart = state.chartsData!.find((ch) => ch.id === action.payload);
+      if (chart && !chart.isReserved) {
+        state.chartsData = state.chartsData!.filter(
+          (ch) => ch.id !== action.payload
+        );
+      }
+    },
+    setIsModalNotOpenClose(state, action: PayloadAction<boolean>) {
+      state.isModalNotification = action.payload;
+    },
+    setChartOnPage(
+      state,
+      action: PayloadAction<ChartDataType | null | undefined>
+    ) {
+      state.chartOnPage = action.payload;
+    },
+    editChart(
+      state,
+      action: PayloadAction<{ id: string | number; chartData: ChartData }>
+    ) {
+      const editedChartIndex = state.chartsData!.findIndex(
+        (ch) => String(ch.id) === String(action.payload.id)
+      );
+      if (editedChartIndex >= 0) {
+        state.chartsData![editedChartIndex] = {
+          ...state.chartsData![editedChartIndex],
+          ...action.payload.chartData,
+        };
+      }
+    },
+    setIsEditing(state, action: PayloadAction<boolean>) {
+      state.isEditing = action.payload;
     },
   },
 });
@@ -161,6 +106,14 @@ export const {
   changeChartType,
   startGettingCharts,
   setChartSocketLoading,
+  setIsModalNotOpenClose,
+  setIsError,
+  addNewChart,
+  setSuccessText,
+  deleteChart,
+  setChartOnPage,
+  editChart,
+  setIsEditing,
 } = chartsSlice.actions;
 
 export const selectChartsData = (state: RootState) => state.charts;

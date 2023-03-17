@@ -1,0 +1,17 @@
+.ModalNotification {
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  &__success {
+    color: rgb(50, 207, 50);
+  }
+  &__error {
+    color: rgb(221, 35, 35);
+  }
+}
+.spinnerWrap {
+  display: flex;
+  justify-content: center;
+}
