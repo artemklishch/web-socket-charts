@@ -1,2 +1,24 @@
 .ErrorPage {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 34px;
+  font-weight: bolder;
+  color: rgb(247, 38, 38);
+  text-align: center;
+  &__btn {
+    border: none;
+    background-color: rgb(231, 142, 26);
+    padding: 10px 20px;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+    border-radius: 10px;
+    text-decoration: none;
+    &:active {
+      opacity: 0.5;
+    }
+  }
 }

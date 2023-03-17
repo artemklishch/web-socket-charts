@@ -1,5 +1,5 @@
 export type ChartDataType = {
-  id: number;
+  id: number | string;
   name: string;
   priceColor: string;
   prevPriceColor: string;
@@ -10,7 +10,7 @@ export type ChartDataType = {
   isReserved?: boolean;
   metricData: Array<{
     Price: number;
-    "Previos Price": number;
+    "Previos Price": number | null;
     month: string;
   }>;
 };
@@ -26,3 +26,10 @@ export type GetLocStStr = () => string | null;
 export type SetLocStStr = (val: string) => void;
 export type SetLocStStrNoArg = () => void;
 export type ClearLocSt = () => void;
+
+export type ChartData = {
+  name: string;
+  priceColor: string;
+  prevPriceColor: string;
+  description: string;
+};

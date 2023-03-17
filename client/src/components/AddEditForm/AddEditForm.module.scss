@@ -1,0 +1,17 @@
+.AddEditForm {
+  &__saveBtn {
+    display: inline-block;
+    border: none;
+    background-color: rgb(56, 112, 235);
+    color: white;
+    font-size: 20px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    cursor: pointer;
+    &:hover,
+    &:active {
+      opacity: 0.8;
+    }
+  }
+}
