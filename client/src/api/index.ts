@@ -1,6 +1,5 @@
 import { ChartData } from "../types";
 import endpoints from "./endpoints";
-import { store } from "../store";
 
 export const createNewChart = (chartData: ChartData) => {
   return fetch(process.env.REACT_APP_BASEURL + endpoints.createNewChart, {
@@ -31,17 +30,16 @@ export const onEditChart = (id: string | number, chartData: ChartData) => {
   });
 };
 
-export const updateChartsOnReload = () => {
-  const { chartsData, interval } = store.getState().charts;
-  const dataToUpdate = {
-    interval,
-    chartsData,
-  };
-  return fetch(process.env.REACT_APP_BASEURL + "/updateCharts", {
+export const getInterval = () => {
+  return fetch(process.env.REACT_APP_BASEURL + endpoints.getInterval);
+};
+
+export const setInterval = (updatedInterval: number) => {
+  return fetch(process.env.REACT_APP_BASEURL + endpoints.setInterval, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(dataToUpdate),
+    body: JSON.stringify({ interval: updatedInterval }),
   });
 };

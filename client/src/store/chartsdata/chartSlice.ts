@@ -98,6 +98,9 @@ export const chartsSlice = createSlice({
     setIsEditing(state, action: PayloadAction<boolean>) {
       state.isEditing = action.payload;
     },
+    setIntervalValue(state, action: PayloadAction<number>) {
+      state.interval = action.payload;
+    },
   },
 });
 
@@ -114,6 +117,7 @@ export const {
   setChartOnPage,
   editChart,
   setIsEditing,
+  setIntervalValue,
 } = chartsSlice.actions;
 
 export const selectChartsData = (state: RootState) => state.charts;

@@ -8,6 +8,7 @@ import { ReactComponent as CloseIcon } from "../../../assets/icons/close_icon.sv
 import ChartTypeOptions from "./ChartTypeOptions";
 import StopStartLink from "./StopStartLink";
 import AddChartLink from "./AddChartLink";
+import SetIntervalLink from "./SetIntervalLink";
 
 type MainLayoutProps = {
   children: ReactNode;
@@ -62,6 +63,7 @@ const MainLayout: FC<MainLayoutProps> = ({ children }) => {
             )}
           </div>
           <AddChartLink />
+          <SetIntervalLink />
           <StopStartLink />
         </nav>
       </aside>

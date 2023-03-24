@@ -1,4 +1,8 @@
 .AddEditForm {
+  &__warning{
+    font-size: 12px;
+    color: rgb(247, 66, 66);
+  }
   &__saveBtn {
     display: inline-block;
     border: none;

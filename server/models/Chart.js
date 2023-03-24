@@ -8,12 +8,14 @@ const chartRenderDataPath = path.join(
   "storage",
   "chartRenderData.json"
 );
-const chartRenderDataPath1 = path.join(
+
+const intervalValueDataPath = path.join(
   __dirname,
   "..",
   "storage",
-  "chartRenderData1.json"
+  "intervalValue.json"
 );
+
 const monthNames = [
   "Jan",
   "Feb",
@@ -69,7 +71,14 @@ module.exports = class Chart {
     const updatedCharts = chartsData.filter((ch) => ch.id !== id);
     fs.writeFileSync(chartRenderDataPath, JSON.stringify(updatedCharts));
   }
-  static updateCharts(chartsData) {
-    fs.writeFileSync(chartRenderDataPath1, JSON.stringify(chartsData));
+  static getInterval() {
+    const interval =
+      JSON.parse(fs.readFileSync(intervalValueDataPath).toString()).interval ||
+      5000;
+    return interval;
+  }
+
+  static setInterval(newIntervalData) {
+    fs.writeFileSync(intervalValueDataPath, JSON.stringify(newIntervalData));
   }
 };
