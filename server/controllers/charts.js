@@ -18,7 +18,8 @@ exports.createNewChart = (req, res) => {
       fs.readFileSync(chartRenderDataPath).toString()
     );
     if (chartsData.length === MAX_CHARTS_AMOUNT) {
-      errorText = "Impossible to add more than 10 charts!";
+      errorText =
+        "Impossible to add more than 10 charts! You can delete any chart and add new one.";
       throw new Error();
     }
     const { name, priceColor, prevPriceColor, description } = req.body;
@@ -59,5 +60,23 @@ exports.editChart = (req, res) => {
     res.status(200).json({ message: "Edited successfully!" });
   } catch (err) {
     res.status(500).json({ message: "Failed to edit!" });
+  }
+};
+
+exports.getInterval = (req, res) => {
+  try {
+    const interval = Chart.getInterval();
+    res.status(200).json({ interval: interval });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to get data!" });
+  }
+};
+
+exports.setInterval = (req, res) => {
+  try {
+    Chart.setInterval(req.body);
+    res.status(201).json("Interval updated!");
+  } catch (err) {
+    res.status(500).json({ message: "Failed to update interval!" });
   }
 };

@@ -1,0 +1,36 @@
+.SetIntervalForm {
+  &__title {
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+    margin: 0 0 20px 0;
+  }
+  &__control {
+    display: flex;
+    justify-content: center;
+    &_select {
+      height: 45px;
+      border-radius: 10px;
+      border: 1px solid rgb(19, 171, 218);
+      font-size: 20px;
+      padding: 0 10px;
+      margin-right: 20px;
+      cursor: pointer;
+    }
+    &_btn {
+      display: inline-block;
+      border: none;
+      background-color: rgb(56, 112, 235);
+      color: white;
+      font-size: 20px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      text-transform: uppercase;
+      cursor: pointer;
+      &:hover,
+      &:active {
+        opacity: 0.8;
+      }
+    }
+  }
+}

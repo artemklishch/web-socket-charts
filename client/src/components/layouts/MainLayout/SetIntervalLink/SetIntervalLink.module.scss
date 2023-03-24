@@ -1,0 +1,13 @@
+@import "../MainLayout.module.scss";
+
+.SetIntervalLink {
+    @include btnlink;
+    height: 62px;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(44, 122, 141);
+    &:hover,
+    &:active {
+      opacity: 0.5;
+    }
+}

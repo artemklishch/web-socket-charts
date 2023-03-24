@@ -55,6 +55,9 @@ const AddEditForm: FC<AddEditFormProps> = ({ onClose }) => {
   const initialValues = getInitialValues(chartOnPage, isEditing);
   return (
     <Modal onClose={onClose}>
+      <span className={classes.AddEditForm__warning}>
+        *you can add no more then 10 charts
+      </span>
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmitHandler}

@@ -10,6 +10,7 @@ import {
   setIsModalNotOpenClose,
   selectChartsData,
 } from "./store/chartsdata/chartSlice";
+import { getIntervalAction } from "./store/chartsdata/api";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 import { ChartDataType } from "./types";
 import socket from "./web-socket";
@@ -31,6 +32,7 @@ function App() {
   const { isModalNotification } = useAppSelector(selectChartsData);
   useEffect(() => {
     dispatch(setStartChartType());
+    dispatch(getIntervalAction());
     socket.on("connect_error", (err: any) => {
       console.log("Error happend", err.message);
       dispatch(setIsError("Failed to get data"));

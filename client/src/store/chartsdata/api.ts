@@ -1,5 +1,11 @@
 import { Dispatch } from "redux";
-import { createNewChart, onDeleteChart, onEditChart } from "../../api";
+import {
+  createNewChart,
+  onDeleteChart,
+  onEditChart,
+  getInterval,
+  setInterval,
+} from "../../api";
 import { ChartData } from "../../types";
 import {
   setIsModalNotOpenClose,
@@ -8,6 +14,7 @@ import {
   setSuccessText,
   deleteChart,
   editChart,
+  setIntervalValue,
 } from "./chartSlice";
 
 export const createNewChartAction = (chartData: ChartData) => {
@@ -67,6 +74,39 @@ export const editChartAction = (id: string | number, chartData: ChartData) => {
       dispatch(setIsModalNotOpenClose(true));
     } catch (err) {
       dispatch(setIsError("Failed to edit"));
+      dispatch(setIsModalNotOpenClose(true));
+    }
+  };
+};
+
+export const getIntervalAction = () => {
+  return async (dispatch: Dispatch) => {
+    try {
+      const response = await getInterval();
+      if (!response.ok || response.status !== 200) {
+        throw new Error();
+      }
+      const interval = await response.json();
+      dispatch(setIntervalValue(interval.interval));
+    } catch (err) {
+      dispatch(setIsError("Failed to get interval value!"));
+      dispatch(setIsModalNotOpenClose(true));
+    }
+  };
+};
+
+export const setIntervalAction = (updatedInterval: number) => {
+  return async (dispatch: Dispatch) => {
+    try {
+      const response = await setInterval(updatedInterval);
+      if (!response.ok || response.status !== 201) {
+        throw new Error();
+      }
+      dispatch(setIntervalValue(updatedInterval));
+      dispatch(setSuccessText("New interval was set successfully!"));
+      dispatch(setIsModalNotOpenClose(true));
+    } catch (err) {
+      dispatch(setIsError("Failed to save new interval value!"));
       dispatch(setIsModalNotOpenClose(true));
     }
   };
